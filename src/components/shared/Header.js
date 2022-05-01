@@ -2,6 +2,7 @@ import React, { Fragment } from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import { Link } from 'react-router-dom'
+
 const linkStyle = {
     color: 'white',
     textDecoration: 'none'
@@ -11,6 +12,11 @@ const authenticatedOptions = (
 		<Nav.Item className="m-2">
 			<Link to="books/new" style={linkStyle}>
 				Add Book
+			</Link>
+		</Nav.Item>
+		<Nav.Item className="m-2">
+			<Link to="/profile/:id" style={linkStyle}>
+				Your Profile
 			</Link>
 		</Nav.Item>
 		<Nav.Item className="m-2">
@@ -44,6 +50,11 @@ const alwaysOptions = (
 				Home
 			</Link>
 		</Nav.Item>
+		<Nav.Item className="m-2">
+			<Link to='/books' style={linkStyle}>
+				All Books
+			</Link>
+		</Nav.Item>
 	</>
 )
 
@@ -51,7 +62,7 @@ const Header = ({ user }) => (
 	<Navbar bg='secondary' variant='dark' expand='md'>
 		<Navbar.Brand className="m-2">
             <Link to='/' style={linkStyle}>
-                Bookmark
+                <img src="https://i.imgur.com/k8mjVbI.png" height="50px" />
             </Link>
         </Navbar.Brand>
 		<Navbar.Toggle aria-controls='basic-navbar-nav' />

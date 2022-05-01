@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { Link } from "react-router-dom"
-import { Spinner,Container,Card, Button} from "react-bootstrap"
+import { Spinner, Container, Card, Button} from "react-bootstrap"
 
 import { showBook, updateBook, removeBook } from "../../api/books"
 import EditBookModal from "./EditBookModal"

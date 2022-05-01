@@ -12,15 +12,7 @@ const EditBookModal = (props) => {
         setBook(prevBook => {
             const name = e.target.name
             let value = e.target.value
-
-            if(name === "credits" && e.target.checked){
-                value = true
-            } else if (name === "credits" && !e.target.checked){
-                value = false
-            }
-
             const updatedValue = { [name]: value }
-
             return {...prevBook, ...updatedValue}
             })
         }

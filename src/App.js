@@ -12,8 +12,13 @@ import SignUp from './components/auth/SignUp'
 import SignIn from './components/auth/SignIn'
 import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
+
+import IndexBook from "./components/books/IndexBooks"
 import ShowBook from "./components/books/ShowBook"
 import CreateBook from "./components/books/CreateBook"
+import ShowProfile from "./components/profile/ShowProfile"
+import ShowMyProfile from "./components/profile/ShowMyProfile"
+import CreateProfile from "./components/profile/CreateProfile"
 
 
 const App = () => {
@@ -46,6 +51,18 @@ const App = () => {
 			<Fragment>
 				<Header user={user} />
 				<Routes>
+
+					{/* Profile: SHOW route */}
+					<Route
+						path="/profile/:id"
+						element={<ShowProfile msgAlert={msgAlert} user={user} />}
+					/>
+					{/* Books: SHOW route */}
+					<Route
+						path="/books/:id"
+						element={<ShowBook msgAlert={msgAlert} user={user} />}
+					/>
+
 					<Route path='/' element={<Home msgAlert={msgAlert} user={user} />} />
 					<Route
 						path='/sign-up'
@@ -70,16 +87,19 @@ const App = () => {
 							<ChangePassword msgAlert={msgAlert} user={user} />
 						</RequireAuth>}
 					/>
+
+					{/* Books: INDEX route */}
+					<Route
+						path="/books"
+						element={<IndexBook msgAlert={msgAlert} user={user} />}
+					/>
+					{/* Books: CREATE route */}
 					<Route
 						path="/books/new"
 						element={
 						<RequireAuth user={user}>
 							<CreateBook msgAlert={msgAlert} user={user} />
 						</RequireAuth>}
-					/>
-					<Route
-						path="/books/:id"
-						element={<ShowBook msgAlert={msgAlert} user={user} />}
 					/>
 
 				</Routes>
