@@ -4,7 +4,7 @@ const Home = (props) => {
 
 	return (
 		<>
-			<h2>Home Page</h2>
+			<h2>Bookmark v0.75</h2>
 		</>
 	)
 }
