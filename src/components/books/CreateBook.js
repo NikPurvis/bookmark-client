@@ -10,7 +10,7 @@ const CreateBook = (props) => {
         title:"",
         author:"",
         publication:"",
-        cover:"cover.png",  // Default placeholder image
+        cover: "https://i.imgur.com/MRdcxrp.png",  // Default placeholder image
         isbn:"",
         genre:"", 
         description:""})
