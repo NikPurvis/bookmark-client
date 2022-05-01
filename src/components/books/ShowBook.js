@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 import { Spinner,Container,Card, Button} from "react-bootstrap"
 
 import { showBook, updateBook, removeBook } from "../../api/books"
+import EditBookModal from "./EditBookModal"
 
 
 const ShowBook = (props) => {
@@ -61,9 +62,6 @@ const ShowBook = (props) => {
                 <Card.Header className="display-4">{book.title}</Card.Header>
                 <Card.Header><img src={`${book.cover}`} width="175" height="300"/></Card.Header>
                 <Card.Body>
-                    <Button onClick={() => deleteThisBook()} className="m-2" variant="danger">
-                        Delete Book
-                    </Button>
                     <Card.Text>
                         <Card.Header>Author: {book.author}</Card.Header><br/>
                         <Card.Header>Publication: {book.publication}</Card.Header><br/>
@@ -73,24 +71,28 @@ const ShowBook = (props) => {
                         <Card.Header>Reviews: {book.reviews}</Card.Header><br/>
 
                     </Card.Text>
-                        {/* <Button onClick={() => setModalOpen(true)} className="m-2" variant="warning">
+
+                    <Button onClick={() => setModalOpen(true)} className="m-2" variant="success">
                             Edit Book
-                        </Button>
-                        {/* delete button */}
-                        {/* <Button onClick={() => deleteBook()} className="m-2" variant="danger">
-                            Delete Book
-                        </Button> */} 
+                    </Button>
+                    <Button onClick={() => deleteThisBook()} className="m-2" variant="danger">
+                        Delete Book
+                    </Button>
+
                 </Card.Body>
             </Card>
         </Container>
-        {/* <EditBookModel 
+
+        { <EditBookModal 
                 book={book}
                 show={modalOpen}
                 user={user}
                 triggerRefresh={() => setUpdated(prev => !prev)}
                 updateBook={updateBook}
                 handleClose={() => setModalOpen(false)}
-            /> */}
+            />
+        }
+
         </>
 
     )
