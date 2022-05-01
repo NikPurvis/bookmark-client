@@ -71,7 +71,7 @@ const App = () => {
 						</RequireAuth>}
 					/>
 					<Route
-						path="/addBook"
+						path="/books/new"
 						element={
 						<RequireAuth user={user}>
 							<CreateBook msgAlert={msgAlert} user={user} />

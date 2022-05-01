@@ -14,7 +14,7 @@ const CreateBook = (props) => {
         isbn:"",
         genre:"", 
         description:""})
-    const {user} = props
+    const { user, msgAlert } = props
 
     const handleChange = (e) => {
         e.persist()
@@ -31,7 +31,20 @@ const CreateBook = (props) => {
         createBook(user, book)
             .then(res=> 
                 {navigate(`/books/${res.data.book.id}`)})
-            .catch(console.error)
+            .then(() => {
+                msgAlert({
+                    heading: "Book added!",
+                    message: "Thanks for adding to our library.",
+                    variant: "success"
+                })
+            })
+            .catch(() => {
+                msgAlert({
+                    heading: "Uh oh...",
+                    message: "Something went wrong",
+                    variant: "danger"
+                })
+            })
     }
 
     return (

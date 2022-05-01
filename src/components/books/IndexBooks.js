@@ -33,7 +33,7 @@ const IndexBooks = (props) => {
     if (books.length > 0) {
         bookCards = books.map(book => (
             <Card key={book.id} style={{ width: '20%', border:"solid 1px"}} className="m-2 bg-dark text-info"  >
-                <Card.Header><strong>{book.title}</strong></Card.Header>
+                <Card.Header><strong><Link to ={`/books/${book._id}`}>{book.title}</Link></strong></Card.Header>
                 <Card.Body>
                     <Card.Text>
                         <Link to ={`/books/${book._id}`}><img src={`${book.cover}`} width='175' height='300'/></Link><br /><br />
