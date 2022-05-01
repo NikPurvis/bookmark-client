@@ -21,6 +21,30 @@ export const createBook = (user, newBook) => {
         headers:{
             Authorization: `Token token=${user.token}`
         },
-        data:{ book: newBook }
+        data: { book: newBook }
+    })
+}
+
+// // PATCH - update book
+// export const updateBook = (user, updatedBook) => {
+//     return axios({
+//         url:`${apiUrl}/books/${updatedBook.id}`,
+//         method: "PATCH",
+//         headers:{
+//             Authorization: `Token token=${user.token}`
+//         },
+//         data: { book: updatedBook }
+//     })
+// }
+
+// DELETE - remove a book
+export const removeBook = (user, bookId) => {
+    console.log("user:", user)
+    return axios({
+        url: `${apiUrl}/books/${bookId}`,
+        method: "DELETE",
+        headers: {
+            Authorization: `Token token=${user.token}`
+        }
     })
 }

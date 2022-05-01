@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react'
-import {useParams, useNavigate} from 'react-router-dom'
-import { Link } from 'react-router-dom'
-import { Spinner,Container,Card, Button} from 'react-bootstrap'
+import React, { useState, useEffect } from "react"
+import { useParams, useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
+import { Spinner,Container,Card, Button} from "react-bootstrap"
 
-import {showBook} from '../../api/books'
+import { showBook, updateBook, removeBook } from "../../api/books"
 
 
 const ShowBook = (props) => {
     const [modalOpen, setModalOpen] = useState(false)
     const [updated, setUpdated] = useState(false)
     const [book, setBook] = useState(null)
-    const {id} = useParams()
+    const { id } = useParams()
     const navigate = useNavigate()
-    const {user,msgAlert} = props
+    const { user, msgAlert } = props
 
     useEffect(() => {
         showBook(id)
@@ -22,24 +22,48 @@ const ShowBook = (props) => {
             .catch(console.error)
     },[updated])
 
+    // Deleting a book
+    const deleteThisBook = () => {
+        removeBook(user, id)
+        .then(() => {
+            msgAlert({
+                heading: "Deleted!",
+                message: "Book successfully removed.",
+                variant: "success"
+            })
+        })
+        .then(() => {navigate("/")})
+        .catch(() => {
+            msgAlert({
+                heading: "Uh oh...",
+                message: "Delete failed",
+                variant: "danger"
+            })
+        })
+    }
+
+    // What to do while API call is running
     if(!book) {
         return (
             <Container>
-                <Spinner animation="border" role='status'>
+                <Spinner animation="border" role="status">
                 <span className="visually-hidden">Loading...</span>
                 </Spinner>
             </Container>
-
         )
     }
 
+    // What to do with data from the API call
     return (
         <>
-        <Container className='fluid'> 
-            <Card className='text-info bg-dark'>
+        <Container className="fluid"> 
+            <Card className="text-info bg-dark">
                 <Card.Header className="display-4">{book.title}</Card.Header>
-                <Card.Header><img src={`${book.cover}`} width='175' height='300'/></Card.Header>
+                <Card.Header><img src={`${book.cover}`} width="175" height="300"/></Card.Header>
                 <Card.Body>
+                    <Button onClick={() => deleteThisBook()} className="m-2" variant="danger">
+                        Delete Book
+                    </Button>
                     <Card.Text>
                         <Card.Header>Author: {book.author}</Card.Header><br/>
                         <Card.Header>Publication: {book.publication}</Card.Header><br/>
