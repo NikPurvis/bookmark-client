@@ -12,3 +12,15 @@ export const getAllBooks = () => {
 export const showBook = (bookId) => {
     return axios(`${apiUrl}/books/${bookId}`)
 }
+
+// POST - create new book
+export const createBook = (user, newBook) => {
+    return axios({
+        url:`${apiUrl}/books`,
+        method:"POST",
+        headers:{
+            Authorization: `Token token=${user.token}`
+        },
+        data:{ book: newBook }
+    })
+}

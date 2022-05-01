@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react'
 import {useParams, useNavigate} from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { Spinner,Container,Card, Button} from 'react-bootstrap'
+
 import {showBook} from '../../api/books'
 
-const ShowBook = (props) => {
 
+const ShowBook = (props) => {
     const [modalOpen, setModalOpen] = useState(false)
     const [updated, setUpdated] = useState(false)
     const [book, setBook] = useState(null)
@@ -41,7 +42,7 @@ const ShowBook = (props) => {
                 <Card.Body>
                     <Card.Text>
                         <Card.Header>Author: {book.author}</Card.Header><br/>
-                        <Card.Header>Publication: {book.publicadtion}</Card.Header><br/>
+                        <Card.Header>Publication: {book.publication}</Card.Header><br/>
                         <Card.Header>ISBN: {book.isbn}</Card.Header><br/>
                         <Card.Header>Genre: {book.genre}</Card.Header><br/>
                         <Card.Header>Description: {book.description}</Card.Header><br/>
