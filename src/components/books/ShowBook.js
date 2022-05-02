@@ -143,7 +143,7 @@ const ShowBook = (props) => {
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-3">
-                                <img src={`${book.cover}`} width="100%" height="300"/>
+                                <img src={`${book.cover}`} width="175" height="300"/>
                             </div>
                             <div class="col-5">
                                 <Card.Header>First Published: <strong>{book.publication}</strong></Card.Header><br/>
