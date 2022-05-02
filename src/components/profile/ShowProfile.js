@@ -3,8 +3,8 @@ import { useParams, useNavigate } from "react-router-dom"
 import { Link } from "react-router-dom"
 import { Spinner, Container, Card, Button} from "react-bootstrap"
 
-import { showProfile, updateMyProfile } from "../../api/profile"
-// import EditProfileModal from "./EditProfileModal"
+import { showProfile, updateProfile } from "../../api/profile"
+import EditProfileModal from "./EditProfileModal"
 
 
 const ShowProfile = (props) => {
@@ -15,19 +15,15 @@ const ShowProfile = (props) => {
     const navigate = useNavigate()
     const { user, msgAlert } = props
 
-    console.log("*************************")
-    console.log("useparams id:", id)
-    console.log("props.user:", user._id)
-    console.log("*************************")
-
-    if (id == ":id") {
+    // Conditional to set the API call ID to the required user object, if we're trying to call a profile without a URL parameter.
+    // (i.e., letting "your profile" apply to whichever user is logged in)    
+    if (id === ":id") {
         id = user._id
     }
 
-    console.log("*************************")
-    console.log("id after conditional:", id)
-    console.log("*************************")
-
+    console.log("====================")
+    console.log("WAY UP HERE uid", id)
+    
     useEffect(() => {
         showProfile(id)
             .then(profile => {
@@ -38,7 +34,7 @@ const ShowProfile = (props) => {
 
 
     // What to do while API call is running
-    if(!profile) {
+    if (!profile) {
         return (
             <Container>
                 <br />
@@ -49,64 +45,62 @@ const ShowProfile = (props) => {
         )
     }
 
-    // // ******** if no profile
-    // // ******** 422 status
-    // import { AxiosResponse, AxiosError } from 'axios'
+    // // Setting a boolean to determine if the ability to edit will render.
+    let theirProfile = false
+    // const idTest = user._id
 
-    // axios.get('foo.com')
-    //   .then((response: AxiosResponse) => {
-    //     // Handle response
-    //   })
-    //   .catch((reason: AxiosError) => {
-    //     if (reason.response!.status === 400) {
-    //       // Handle 400
-    //     } else {
-    //       // Handle else
+    // if (id !== null) {console.log("nope see:", id, user.profile.owner)
+    // } else {
+    //     console.log("totally null")
+    // }
+
+    // if (user._id === null || user._id === undefined) {
+    //     theirProfile = false
+    // } else {
+    //     if (user._id !== user.profile.owner) {
+    //         theirProfile = true
     //     }
-    //     console.log(reason.message)
-    //   })
-
+    // }
+    
+    // console.log("******************")
+    // console.log("user id:", id)
+    // console.log("profile owner:", profile.owner)
+    // console.log("username:", profile.username)
+    // console.log("******************")
 
     // What to do with data from the API call
     return (
-        <>
+        <><br />
         <Container className="fluid">
-
-        <p>Username: {profile.username}</p>
-        <p>Location: {profile.username}</p>
-        <p>Fav books: {profile.username}</p>
-        <p>Fav authors: {profile.username}</p>
-        <p>Fav genres: {profile.username}</p>
-        <p>Fav quote: {profile.username}</p>
-
-{/* 
-
             <Card className="text-info bg-dark">
-                <Card.Header className="display-4">{book.title}</Card.Header>
-                <Card.Header><img src={`${book.cover}`} width="175" height="300"/></Card.Header>
+                <Card.Header className="display-4">
+                        Your User Profile
+                </Card.Header>
                 <Card.Body>
                     <Card.Text>
-                        <Card.Header>Author: {book.author}</Card.Header><br/>
-                        <Card.Header>Publication: {book.publication}</Card.Header><br/>
-                        <Card.Header>ISBN: {book.isbn}</Card.Header><br/>
-                        <Card.Header>Genre: {book.genre}</Card.Header><br/>
-                        <Card.Header>Description: {book.description}</Card.Header><br/>
-                        <Card.Header>Reviews: {book.reviews}</Card.Header><br/>
+                        <Card.Header>Username: {profile.username}</Card.Header><br/>
+                        <Card.Header>Location: {profile.location}</Card.Header><br/>
+                        <Card.Header>Favorite Books: {profile.fav_books}</Card.Header><br/>
+                        <Card.Header>Favorite Authors: {profile.fav_authors}</Card.Header><br/>
+                        <Card.Header>Favorite genres: {profile.genres}</Card.Header><br/>
+                        <Card.Header>Favorite quote: {profile.quote}</Card.Header><br/>
+                    </Card.Text>
 
-                    </Card.Text> */}
+                    {id === profile.owner &&
+                        <Button onClick={() => setModalOpen(true)} className="m-2" variant="success">
+                                Edit Profile
+                        </Button>
+                    }
 
-                    {/* <Button onClick={() => setModalOpen(true)} className="m-2" variant="success">
-                            Edit Profile
-                    </Button> */}
                     {/* <Button onClick={() => deleteThisBook()} className="m-2" variant="danger">
                         Delete Book
                     </Button> */}
 
-                {/* </Card.Body>
-            </Card> */}
+                </Card.Body>
+            </Card>
         </Container>
 
-        {/* { <EditProfileModal 
+        { <EditProfileModal 
                 profile={profile}
                 show={modalOpen}
                 user={user}
@@ -114,7 +108,7 @@ const ShowProfile = (props) => {
                 updateProfile={updateProfile}
                 handleClose={() => setModalOpen(false)}
             />
-        } */}
+        }
         </>
     )
 }
