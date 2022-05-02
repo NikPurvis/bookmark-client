@@ -1,12 +1,12 @@
-import React, {useState, useEffect } from 'react'
-import { getAllBooks } from '../../api/books'
-import { Link } from 'react-router-dom'
-import { Card } from 'react-bootstrap'
+import React, { useState, useEffect } from "react"
+import { getAllBooks } from "../../api/books"
+import { Link } from "react-router-dom"
+import { Card } from "react-bootstrap"
 
 const cardContainerLayout = {
-    display: 'flex',
-    justifyContent: 'center',
-    flexFlow: 'row wrap'
+    display: "flex",
+    justifyContent: "center",
+    flexFlow: "row wrap"
 }
 
 const IndexBooks = (props) => {
@@ -32,11 +32,11 @@ const IndexBooks = (props) => {
 
     if (books.length > 0) {
         bookCards = books.map(book => (
-            <Card key={book.id} style={{ width: '20%', border:"solid 1px"}} className="m-2 bg-dark text-info"  >
+            <Card key={book.id} style={{ width: "20%", border:"solid 1px"}} className="m-2 bg-dark text-info"  >
                 <Card.Header><strong><Link to ={`/books/${book._id}`}>{book.title}</Link></strong></Card.Header>
                 <Card.Body>
                     <Card.Text>
-                        <Link to ={`/books/${book._id}`}><img src={`${book.cover}`} width='175' height='300'/></Link><br /><br />
+                        <Link to ={`/books/${book._id}`}><img src={`${book.cover}`} width="175" height="300"/></Link><br /><br />
                         <strong>{book.author}</strong>
                         <p>{book.publication} {book.genre}</p>
                     </Card.Text>
@@ -46,8 +46,8 @@ const IndexBooks = (props) => {
     }
 
     return (
-        <div className='bg-dark'>
-            <h3 class='text-center'>books</h3>
+        <div className="bg-dark">
+            <h3 class="text-center">books</h3>
             <div style={cardContainerLayout}>
                 {bookCards}
             </div>

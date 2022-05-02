@@ -74,9 +74,9 @@ const ShowBook = (props) => {
     //         })
     //         .then(() => {
     //             msgAlert({
-    //                 heading: 'Book added',
-    //                 message: 'This book is now on your bookshelf.',
-    //                 variant: 'success',
+    //                 heading: "Book added",
+    //                 message: "This book is now on your bookshelf.",
+    //                 variant: "success",
     //             })
     //         })
     //     .catch(error => console.log(error))
@@ -136,78 +136,87 @@ const ShowBook = (props) => {
         <>
         <Container className="fluid"> 
             <Card className="text-info bg-dark">
-                <Card.Header className="display-4">{book.title}</Card.Header>
-                <Card.Header><img src={`${book.cover}`} width="175" height="300"/></Card.Header>
+                <Card.Header className="display-4">{book.title} by {book.author}</Card.Header>
+                
                 <Card.Body>
-                    <Card.Text>
-                        <Card.Header>Author: {book.author}</Card.Header><br/>
-                        <Card.Header>Publication: {book.publication}</Card.Header><br/>
-                        <Card.Header>ISBN: {book.isbn}</Card.Header><br/>
-                        <Card.Header>Genre: {book.genre}</Card.Header><br/>
-                        <Card.Header>Description: {book.description}</Card.Header><br/>
-                        {/* <Card.Header>Reviews: {book.reviews}</Card.Header><br/> */}
-                    </Card.Text>
-
-                    {/* <Button onClick={() => shelfAddition()} variant="outline-success">
-                        Add book to shelf
-                    </Button> */}
-
-                    <Button onClick={() => setModalOpen(true)} className="m-2" variant="success">
-                            Edit Book
-                    </Button>
-                    <Button onClick={() => deleteThisBook()} className="m-2" variant="danger">
-                        Delete Book
-                    </Button>
-
-                    <Button onClick={()=> setReviewModalOpen(true)} className="m-2" variant="warning">
-                        Review book
-                    </Button>
-                    
-                    <h3 className class="text-primary">Reviews:</h3> 
-                        {/* <p>{reviews}</p> */}
-
-                    <CreateReview
-                        user={user}
-                        book={book}
-                        show={reviewModalOpen}
-                        triggerRefresh={() => setUpdated(prev => !prev)}
-                        handleClose={()=> setReviewModalOpen(false)}
-                    />
-
-                {book.reviews.map((review) => (
-                        review?.owner === user?._id ?
-                            (<Card style={{ width: '70%' }} className="comment-card">
-                                <Card.Body>
-                                    <div className="comment-date">
-                                        {/* <small><Moment format="MMMM DD, YYYY">{comment.date}</Moment></small> */}
-                                        <CloseButton className="comment-button" variant="light" onClick={() => removeThisReview(book?._id, review?._id)}/>
-                                    </div>
-                                    <div className="comment-card-body d-flex row-nowrap">
-                                        <a className="comment-card-username" href={`/profile/${review.owner}`}>{review.subject}</a><br />
-                                        {review.text}
-                                    </div>
-                                </Card.Body>
-
-                            </Card>)
-                            :
-                            (<Card style={{ width: '70%' }} className="comment-card">
-                                <Card.Body>
-                                    <div className="comment-date">
-                                        {/* <small><Moment format="MMMM DD, YYYY">{comment.date}</Moment></small> */}
-                                    </div>
-                                    <div className="comment-card-body d-flex row-nowrap">
-                                        <a className="comment-card-username" href={`/profile/${review.owner}`}>{review.subject}</a><br />
-                                        {review.text}
-                                    </div>
-                                </Card.Body>
-                            </Card>)
-                    ))}
-
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-3">
+                                <img src={`${book.cover}`} width="100%" height="300"/>
+                            </div>
+                            <div class="col-5">
+                                <Card.Header>First Published: <strong>{book.publication}</strong></Card.Header><br/>
+                                <Card.Header>ISBN: <strong>{book.isbn}</strong></Card.Header><br/>
+                                <Card.Header>Genre: <strong>{book.genre}</strong></Card.Header><br/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <Card.Header>
+                                <br />{book.description}
+                            </Card.Header>
+                        </div>
+                    </div>
                 </Card.Body>
-            </Card>
-        </Container>
 
-        { <EditBookModal 
+                {user ?
+                <>
+                    <Card.Body>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12">
+                                    <Button onClick={() => setModalOpen(true)} className="m-2" variant="success">
+                                    Edit Book
+                                    </Button>
+                                    <Button onClick={() => deleteThisBook()} className="m-2" variant="danger">
+                                        Delete Book
+                                    </Button>
+                                    <Button onClick={()=> setReviewModalOpen(true)} className="m-2" variant="warning">
+                                        Review book
+                                    </Button>
+                                </div>
+                            </div>
+                        </div>
+                    </Card.Body>
+                </> : null }<br />
+
+
+
+                <Card.Body className="bg-secondary col-9 offset-1">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-10 offset-1">
+                        <h3 className class="text-light">Reviews:</h3>
+
+
+                        {book.reviews.map((review) => (
+                            <div class="card bg-dark">
+                                <Card.Header className="card-title">
+                                    {review?.owner === user?._id &&
+                                    <CloseButton className="btn-close-white" onClick={() => removeThisReview(book?._id, review?._id)}/>} 
+                                    <strong><span class="text-warning">{review.subject}</span></strong>
+                                    <a className="comment-card-username" href={`/profile/${review.owner}`}></a> <i>({user.email})</i>
+                                </Card.Header>
+                                <Card.Body>
+                                    {review.text}
+                                </Card.Body>
+                            </div>
+                        ))}
+                        </div>
+                    </div>
+                </div>
+                </Card.Body><br />
+            </Card>
+        </Container><br /><br />
+
+        <CreateReview
+            user={user}
+            book={book}
+            show={reviewModalOpen}
+            triggerRefresh={() => setUpdated(prev => !prev)}
+            handleClose={()=> setReviewModalOpen(false)}
+        />
+
+        <EditBookModal 
                 book={book}
                 show={modalOpen}
                 user={user}
@@ -215,10 +224,8 @@ const ShowBook = (props) => {
                 updateBook={updateBook}
                 handleClose={() => setModalOpen(false)}
             />
-        }
 
         </>
-
     )
 }
 
