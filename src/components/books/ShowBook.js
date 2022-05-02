@@ -60,16 +60,6 @@ const ShowBook = (props) => {
         })
     }
 
-    // What to do while API call is running
-    if(!book) {
-        return (
-            <Container>
-                <Spinner animation="border" role="status">
-                <span className="visually-hidden">Loading...</span>
-                </Spinner>
-            </Container>
-        )
-    }
 
     // // Adding book to shelf
     // const shelfAddition = () => {
@@ -102,8 +92,8 @@ const ShowBook = (props) => {
     //         .catch(error => console.log(error))
     // }
 
-    let allTheseReviews
-
+    // let allTheseReviews
+    // 
     // if (book) {
     //     if (book.reviews.length > 0 ) {
     //         allTheseReviews = book.reviews.map(review => (
@@ -115,6 +105,30 @@ const ShowBook = (props) => {
     //         ))
     //     }
     // }
+
+    const removeThisReview = (book, review) => {
+        removeReview(user, book, review)
+        .then(() => setUpdated(true))
+        .catch(() => {
+            msgAlert({
+                heading: "Uh oh...",
+                message: "Something went wrong.",
+                variant: "danger",
+            })
+        })
+    }
+
+
+    // What to do while API call is running
+    if(!book) {
+        return (
+            <Container>
+                <Spinner animation="border" role="status">
+                <span className="visually-hidden">Loading...</span>
+                </Spinner>
+            </Container>
+        )
+    }
 
 
     // What to do with data from the API call
@@ -166,10 +180,10 @@ const ShowBook = (props) => {
                                 <Card.Body>
                                     <div className="comment-date">
                                         {/* <small><Moment format="MMMM DD, YYYY">{comment.date}</Moment></small> */}
-                                        <CloseButton className="comment-button" variant="light" onClick={() => removeReview(book?._id, review?._id)}/>
+                                        <CloseButton className="comment-button" variant="light" onClick={() => removeThisReview(book?._id, review?._id)}/>
                                     </div>
                                     <div className="comment-card-body d-flex row-nowrap">
-                                        <a className="comment-card-username" href={`/profile/${review?.owner}`}>{review?.subject}</a>
+                                        <a className="comment-card-username" href={`/profile/${review.owner}`}>{review.subject}</a><br />
                                         {review.text}
                                     </div>
                                 </Card.Body>
@@ -182,7 +196,7 @@ const ShowBook = (props) => {
                                         {/* <small><Moment format="MMMM DD, YYYY">{comment.date}</Moment></small> */}
                                     </div>
                                     <div className="comment-card-body d-flex row-nowrap">
-                                        <a className="comment-card-username" href={`/profile/${review?.owner}`}>{review?.subject}</a>
+                                        <a className="comment-card-username" href={`/profile/${review.owner}`}>{review.subject}</a><br />
                                         {review.text}
                                     </div>
                                 </Card.Body>

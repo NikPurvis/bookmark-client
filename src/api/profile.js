@@ -20,17 +20,18 @@ export const showProfile = (userId) => {
 //     })
 // }
 
-// POST - create new profile
-export const createProfile = (user, newProfile) => {
-    return axios({
-        url:`${apiUrl}/profile/new`,
-        method:"POST",
-        headers:{
-            Authorization: `Token token=${user.token}`
-        },
-        data: { profile: newProfile }
-    })
-}
+// // No longer necessary, profile is created alongside new user
+// // POST - create new profile
+// export const createProfile = (user, newProfile) => {
+//     return axios({
+//         url:`${apiUrl}/profile/new`,
+//         method:"POST",
+//         headers:{
+//             Authorization: `Token token=${user.token}`
+//         },
+//         data: { profile: newProfile }
+//     })
+// }
 
 // PATCH - update profile
 export const updateProfile = (user, updatedProfile) => {

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { Link } from "react-router-dom"
@@ -20,6 +21,9 @@ const ShowProfile = (props) => {
     if (id === ":id") {
         id = user._id
     }
+
+    // console.log("*********************")
+    // console.log("user.id:", user._id)
 
     useEffect(() => {
         showProfile(id)
