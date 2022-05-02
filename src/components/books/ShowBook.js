@@ -134,6 +134,7 @@ const ShowBook = (props) => {
     // What to do with data from the API call
     return (
         <>
+        <br />
         <Container className="fluid"> 
             <Card className="text-info bg-dark">
                 <Card.Header className="display-4">{book.title} by {book.author}</Card.Header>
