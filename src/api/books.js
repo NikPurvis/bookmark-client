@@ -9,7 +9,7 @@ export const getAllBooks = () => {
 }
 
 // SHOW - get one book
-export const showBook = (bookId) => {
+export const getOneBook = (bookId) => {
     return axios(`${apiUrl}/books/${bookId}`)
 }
 

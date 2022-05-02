@@ -49,7 +49,7 @@ const ShowProfile = (props) => {
             <Container className="fluid">
                 <Card className="text-info bg-dark">
                     <Card.Header className="display-4">
-                            Your User Profile
+                            User Profile for {profile.username}
                     </Card.Header>
                     <Card.Body>
                         <Card.Text>

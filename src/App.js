@@ -17,8 +17,9 @@ import IndexBook from "./components/books/IndexBooks"
 import ShowBook from "./components/books/ShowBook"
 import CreateBook from "./components/books/CreateBook"
 import ShowProfile from "./components/profile/ShowProfile"
-import ShowMyProfile from "./components/profile/ShowMyProfile"
-import CreateProfile from "./components/profile/CreateProfile"
+// import ShowReview from "./components/review/ShowReview"
+import CreateReview from "./components/reviews/CreateReview"
+
 
 
 const App = () => {
@@ -96,6 +97,14 @@ const App = () => {
 					{/* Books: CREATE route */}
 					<Route
 						path="/books/new"
+						element={
+						<RequireAuth user={user}>
+							<CreateBook msgAlert={msgAlert} user={user} />
+						</RequireAuth>}
+					/>
+					{/* Reviews: CREATE route */}
+					<Route
+						path="/reviews/new"
 						element={
 						<RequireAuth user={user}>
 							<CreateBook msgAlert={msgAlert} user={user} />
